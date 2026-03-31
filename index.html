@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEQUUS | PROFESSIONAL PORTFOLIO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="snap-container">
+
+
+        <!-- INTRODUCTION -->
+        <section id="intro" class="snap-section">
+            <div class="content-wrapper centered">
+                <div class="intro-left">
+                    <h1 class="glitch-text">AEQUUS</h1>
+                    <div class="badge-container">
+                        <div class="badge-slot" title="SOURCE CODE" id="source-btn">
+                            <img src="icons8-source-code-96.png" alt="Source Icon">
+                        </div>
+                        <div class="badge-slot" title="REPORT BUG" id="bug-btn">
+                            <img src="icons8-bug-64.png" alt="Bug Icon">
+                        </div>
+                        <div class="badge-slot" title="CONTACT ME" id="contact-btn">
+                            <img src="icons8-contact-96.png" alt="Contact Icon">
+                        </div>
+                    </div>
+
+                    <div id="copy-toast" class="toast">COPIED TO CLIPBOARD</div>
+                    <div class="server-tag-wrapper">
+                        <a href="https://discord.gg/yourlink" target="_blank" class="server-tag">
+                            <span class="status-online"></span>
+                            AEQUUS COMMUNITY
+                            <span class="tag-meta">JOIN SERVER</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KERNEL PANIC LOG -->
+        <div id="kernel-glitch" class="kernel-glitch"></div>
+
+        <!-- TERMINAL OVERLAY -->
+        <div id="terminal" class="terminal-overlay">
+            <div class="terminal-content">
+                <p class="terminal-line">[ SYSTEM RESTORE ]</p>
+                <p class="terminal-line">TYPE ANY COMMAND TO REBOOT AEQUUS:</p>
+                <div class="terminal-input-line">
+                    <span>></span>
+                    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                </div>
+                <p id="terminal-error" class="terminal-error-msg"></p>
+            </div>
+        </div>
+
+        <!-- DETAILS -->
+        <section id="details" class="snap-section">
+
+
+            <div class="content-wrapper">
+                <div class="details-grid">
+                    <div class="description-box">
+                        <h2>ABOUT ME</h2>
+                        <p>MODERN. PROFESSIONAL. FAST. OPTIMIZED. CREATING UNIQUE DIGITAL EXPERIENCES WITH PASSION AND PRECISION.</p>
+                    </div>
+                    <div class="playlist-box">
+                        <h2>CURRENT PLAYLIST</h2>
+                        <ul class="playlist-list">
+                            <li><span class="play-icon">▶</span> SYDNEY - ARGY</li>
+                            <li><span class="play-icon">▶</span> METRO - KEVIN DE VRIES</li>
+                            <li><span class="play-icon">▶</span> SANDSTORM - DARUDE</li>
+                        </ul>
+                    </div>
+                    <div class="languages-box">
+                        <h2>LANGUAGES</h2>
+                        <div class="lang-chips">
+                            <span class="chip">HUNGARIAN</span>
+                            <span class="chip">ENGLISH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERTISE -->
+        <section id="expertise" class="snap-section">
+            <div class="content-wrapper">
+                <div class="expertise-layout">
+                    <div class="skills-column">
+                        <h2>EXPERTISE</h2>
+                        <div class="skill-item">UI/UX DESIGN</div>
+                        <div class="skill-item">FRONTEND DEVELOPMENT</div>
+                        <div class="skill-item">CSS ARCHITECTURE</div>
+                        <div class="skill-item">PERFORMANCE OPTIMIZATION</div>
+                    </div>
+                    <div class="help-column">
+                        <h2>HOW I CAN HELP</h2>
+                        <div class="help-card">
+                            <h3>BUILDING THE FUTURE</h3>
+                            <p>TRANSFORMING IDEAS INTO REALITY WITH MODERN WEB TECHNOLOGIES.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT & FOOTER -->
+        <section id="contact" class="snap-section footer-section">
+            <div class="content-wrapper">
+                <div class="contact-header">
+                    <h2>GET IN TOUCH</h2>
+                    <a href="mailto:work@akoos.eu" class="contact-email">WORK@AKOOS.EU</a>
+                </div>
+                
+                <footer class="sitemap-footer">
+                    <div class="footer-grid">
+                        <div class="footer-col">
+                            <h4>PROJECTS</h4>
+                            <a href="#">AEQUUS APP</a>
+                            <a href="#">SYSTEM X</a>
+                            <a href="#">LABS</a>
+                        </div>
+                        <div class="footer-col">
+                            <h4>SOCIAL</h4>
+                            <a href="https://discord.gg/yourlink" target="_blank">AEQUUS COMMUNITY</a>
+                        </div>
+                        <div class="footer-col">
+                            <h4>LEGAL</h4>
+                            <a href="error.html">PRIVACY & TERMS</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <!-- CURSOR ELEMENTS AT THE END FOR BETTER STACKING -->
+    <div class="cursor"></div>
+    <div class="cursor-blob"></div>
+
+
+    <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></canvas>
+    <script>
+        // CUSTOM CURSOR & MAGNETIC EFFECT
+        const cursor = document.querySelector('.cursor');
+        const blob = document.querySelector('.cursor-blob');
+        const clickables = document.querySelectorAll('a, .badge-slot, .server-tag, button');
+
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let blobX = 0, blobY = 0;
+        let isMagnetic = false;
+        let targetEl = null;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        clickables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                isMagnetic = true;
+                targetEl = el;
+                blob.classList.add('magnetic');
+            });
+            el.addEventListener('mouseleave', () => {
+                isMagnetic = false;
+                targetEl = null;
+                blob.classList.remove('magnetic');
+            });
+        });
+
+        function lerp(start, end, amt) {
+            return (1 - amt) * start + amt * end;
+        }
+
+        function updateCursor() {
+            if (isMagnetic && targetEl) {
+                const rect = targetEl.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // Snap visual cursor and blob to center with slightly different weights
+                cursorX = lerp(cursorX, centerX, 0.2);
+                cursorY = lerp(cursorY, centerY, 0.2);
+                blobX = lerp(blobX, centerX, 0.15);
+                blobY = lerp(blobY, centerY, 0.15);
+            } else {
+                cursorX = lerp(cursorX, mouseX, 0.2);
+                cursorY = lerp(cursorY, mouseY, 0.2);
+                blobX = lerp(blobX, mouseX, 0.1);
+                blobY = lerp(blobY, mouseY, 0.1);
+            }
+
+            cursor.style.transform = `translate(${cursorX - 4}px, ${cursorY - 4}px)`;
+            blob.style.left = `${blobX}px`;
+            blob.style.top = `${blobY}px`;
+
+            requestAnimationFrame(updateCursor);
+        }
+        updateCursor();
+
+        // DISABLE RIGHT CLICK
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            launchConfetti();
+        });
+
+        // CONTACT BUTTON LOGIC
+        const contactBtn = document.getElementById('contact-btn');
+        const toast = document.getElementById('copy-toast');
+        const email = 'work@akoos.eu';
+
+        contactBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(email).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+            setTimeout(() => {
+                window.location.href = `mailto:${email}`;
+            }, 500);
+        });
+
+        // SOURCE BUTTON LOGIC
+        const sourceBtn = document.getElementById('source-btn');
+        sourceBtn.addEventListener('click', () => {
+             window.open('https://github.com/your-username', '_blank');
+              // BUG BUTTON EASTER EGG
+        const bugBtn = document.getElementById('bug-btn');
+        const terminal = document.getElementById('terminal');
+        const kernelGlitch = document.getElementById('kernel-glitch');
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalError = document.getElementById('terminal-error');
+
+        function generateKernelLog() {
+            const logs = [
+                "CRITICAL: CPU 0 PID 1 'systemd' NOT RESPONDING",
+                "PANIC: KERNEL EXCEPTION AT 0x0000FFBC4291",
+                "ERROR: MEMORY SEGMENTATION FAULT",
+                "INTERRUPT: UNHANDLED IRQ 14 AT EIP 0xF3B2",
+                "PROCESS: KILLED BY OOM KILLER",
+                "DAEMON: CRASHED - EXIT CODE 127",
+                "BUS: I/O TIMEOUT AT ADDR 0x4200",
+                "REGS: EAX: 0x129B EBX: 0x0000 ECX: 0xFFFF",
+                "STACK TRACE CAPTURED - DUMPING..."
+            ];
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerText = `[${new Date().toLocaleTimeString()}] ${logs[Math.floor(Math.random() * logs.length)]}`;
+            kernelGlitch.appendChild(line);
+            if (kernelGlitch.children.length > 50) kernelGlitch.removeChild(kernelGlitch.firstChild);
+            kernelGlitch.scrollTop = kernelGlitch.scrollHeight;
+        }
+
+        bugBtn.addEventListener('click', () => {
+            // APPLY FALL-APART TO EVERYTHING
+            const allElements = document.querySelectorAll('.snap-section *');
+            allElements.forEach(el => {
+                const rx = (Math.random() * 400 - 200) + 'px';
+                const ry = (Math.random() * 400 - 200) + 'px';
+                const rr = (Math.random() * 720 - 360) + 'deg';
+                el.style.setProperty('--rx', rx);
+                el.style.setProperty('--ry', ry);
+                el.style.setProperty('--rr', rr);
+            });
+            document.body.classList.add('system-crash');
+
+            // START GLITCH LOG
+            setTimeout(() => {
+                kernelGlitch.classList.add('active');
+                const logInterval = setInterval(generateKernelLog, 50);
+                
+                // AFTER 3 SECONDS OF GLITCH, SHOW TERMINAL
+                setTimeout(() => {
+                    clearInterval(logInterval);
+                    kernelGlitch.classList.remove('active');
+                    terminal.classList.add('active');
+                    terminalInput.focus();
+                }, 3000);
+            }, 1000);
+        });
+
+        terminalInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const val = terminalInput.value.trim();
+                if (val.length > 0) {
+                    terminalError.style.color = '#00FF00';
+                    terminalError.innerText = 'COMMAND ACCEPTED. RELOADING KERNEL...';
+                    setTimeout(() => location.reload(), 2000);
+                } else {
+                    terminalError.style.color = '#FF0000';
+                    terminalError.innerText = 'SYSTEM ERROR: NO COMMAND ENTERED.';
+                }
+            }
+        });
+    });
+
+        // PREVENT TERMINAL INPUT FROM LOSING FOCUS
+        document.addEventListener('click', () => {
+            if (terminal.classList.contains('active')) {
+                terminalInput.focus();
+            }
+        });
+
+        // CONFETTI LOGIC
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const colors = ['#EAE9E1', '#333333', '#DEDCD3', '#FDFCF5'];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor(x, y, vx, vy) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.size = Math.random() * 8 + 4;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 10;
+                this.opacity = 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.1; // Reduced gravity for slower fall
+                this.rotation += this.rotationSpeed;
+                this.opacity -= 0.005; // Slightly slower fade for more visibility
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function launchConfetti() {
+            // Left corner - doubled to 80
+            for (let i = 0; i < 80; i++) {
+                particles.push(new Particle(0, canvas.height, Math.random() * 5 + 5, -Math.random() * 15 - 10));
+            }
+            // Right corner - doubled to 80
+            for (let i = 0; i < 80; i++) {
+                particles.push(new Particle(canvas.width, canvas.height, -Math.random() * 5 - 5, -Math.random() * 15 - 10));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles = particles.filter(p => p.opacity > 0);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
+

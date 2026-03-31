@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | NOT FOUND | AEQUUS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none !important;
+        }
+        .error-container {
+
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--bg-color);
+        }
+        .error-code {
+            font-size: 10vw;
+            font-weight: 900;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .back-home {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-weight: 900;
+            transition: all 0.3s;
+        }
+        .back-home:hover {
+            background: var(--accent-color);
+            color: var(--text-color);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">THE PAGE YOU ARE LOOKING FOR DOES NOT EXIST OR WAS MOVED.</p>
+        <a href="index.html" class="back-home">RETURN TO CORE</a>
+    </div>
+</body>
+</html>
